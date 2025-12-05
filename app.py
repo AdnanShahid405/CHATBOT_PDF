@@ -24,13 +24,15 @@ try:
     from PIL import Image
     OCR_AVAILABLE = True
     
-    # Set Tesseract path for Windows (adjust if installed elsewhere)
     if os.name == 'nt':  # Windows
         tesseract_path = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
         if os.path.exists(tesseract_path):
             pytesseract.pytesseract.tesseract_cmd = tesseract_path
         else:
-            logger.warning("Tesseract not found at default path. OCR may not work.")
+            logger.warning("Tesseract not found at default Windows path. OCR may not work.")
+    else:  # Linux/Docker
+        # In Docker/Linux, tesseract is in PATH by default
+        pass
     
     logger.info("✓ OCR capabilities available (pytesseract + pdf2image)")
 except ImportError:
