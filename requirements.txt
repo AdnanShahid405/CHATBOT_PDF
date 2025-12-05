@@ -1,0 +1,6 @@
+Flask
+flask-cors
+google-generativeai
+sentence-transformers
+numpy
+PyPDF2

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Chatbot - AI Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>PDF Chatbot</h1>
+            </div>
+            <div class="status-indicator" id="statusIndicator">
+                <span class="status-dot"></span>
+                <span class="status-text">Connecting...</span>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="upload-section">
+                    <h2><i class="fas fa-file-pdf"></i> Upload Document</h2>
+                    
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag & drop PDF here or click to browse</p>
+                        <input type="file" id="fileInput" accept=".pdf" hidden>
+                        <button class="btn btn-primary" id="browseBtn">
+                            <i class="fas fa-folder-open"></i> Browse Files
+                        </button>
+                    </div>
+
+                    <div class="file-info" id="fileInfo" style="display: none;">
+                        <div class="file-details">
+                            <i class="fas fa-file-pdf"></i>
+                            <div>
+                                <p class="file-name" id="fileName">-</p>
+                                <p class="file-stats" id="fileStats">-</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" id="removeFileBtn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+
+                    <div class="upload-progress" id="uploadProgress" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <p class="progress-text" id="progressText">Processing...</p>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h3><i class="fas fa-info-circle"></i> How it works</h3>
+                    <ol>
+                        <li>Upload a PDF document</li>
+                        <li>Wait for processing</li>
+                        <li>Ask questions about the content</li>
+                        <li>Get AI-powered answers</li>
+                    </ol>
+                </div>
+
+                <div class="stats-section" id="statsSection">
+                    <h3><i class="fas fa-chart-bar"></i> Document Stats</h3>
+                    <div class="stat-item">
+                        <span class="stat-label">Chunks:</span>
+                        <span class="stat-value" id="chunksCount">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Characters:</span>
+                        <span class="stat-value" id="charsCount">0</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Chat Area -->
+            <main class="chat-container">
+                <div class="welcome-screen" id="welcomeScreen">
+                    <i class="fas fa-comments"></i>
+                    <h2>Welcome to PDF Chatbot</h2>
+                    <p>Upload a PDF document to start asking questions</p>
+                </div>
+
+                <div class="chat-area" id="chatArea" style="display: none;">
+                    <div class="messages" id="messages"></div>
+                    
+                    <div class="input-area">
+                        <div class="input-wrapper">
+                            <textarea 
+                                id="messageInput" 
+                                placeholder="Ask a question about your document..."
+                                rows="1"
+                                disabled
+                            ></textarea>
+                            <button class="btn btn-send" id="sendBtn" disabled>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <p class="input-hint">Press Enter to send, Shift+Enter for new line</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
